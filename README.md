@@ -41,12 +41,17 @@ client.on("updated", (message, added, removed) => {
   //Will run when reactions have changed (added / removed) ...
   //Although it is impossible to remove reactions from the frontend it IS POSSIBLE
 });
+
+connectRealtime(client); // Connect using the realtime endpoint HTTP stream (unreliable, inexpensive)
+
+connextPolling(client, { interval: 2_500, length: 15 }); // Connect by polling the retrieve messages endpoint at an interval (reliable, expensive)
+
 ```
 
 ### Tomfoolery
 
 ```typescript
-import { sendMessage } from "./pocket-internal.ts";
+import { sendMessage, updateReactions } from "./pocket-internal.ts";
 
 const client = ...
 
